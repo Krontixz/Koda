@@ -64,7 +64,6 @@ pub fn tokenize(line: &str) -> KodaNode {
 }
 
 #[no_mangle]
-pub extern "C" fn koda_parse(input: *const std::os::raw::c_char) -> *mut std::os::raw::c_char {
-    // This allows C++, C#, Java to send a string and get a result
-    std::ptr::null_mut() 
+pub extern "C" fn koda_version() -> i32 {
+    100
 }
