@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <script>
+        async function initKoda() {
+            const response = await fetch('koda.wasm');
+            const buffer = await response.arrayBuffer();
+            const module = await WebAssembly.instantiate(buffer);
+            
+            const koda = module.instance.exports;
+            
+            window.parseKoda = (input) => {
+                const ptr = koda.koda_full_process(input);
+                // Logic to read string from WASM memory
+                return ptr;
+            };
+        }
+        initKoda();
+    </script>
+</body>
+</html>
