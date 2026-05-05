@@ -1,0 +1,23 @@
+name: Build Koda
+on: [push]
+jobs:
+  release:
+    strategy:
+      matrix:
+        os: [windows-latest, macos-latest, ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build
+        run: cargo build --release
+      - name: Rename Windows
+        if: matrix.os == 'windows-latest'
+        run: mv target/release/koda.exe koda_installer.exe
+      - name: Rename Unix
+        if: matrix.os != 'windows-latest'
+        run: mv target/release/koda koda_installer
+      - name: Upload
+        uses: actions/upload-artifact@v3
+        with:
+          name: koda-${{ matrix.os }}
+          path: koda_installer*
