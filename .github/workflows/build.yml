@@ -7,13 +7,13 @@ jobs:
       matrix:
         include:
           - os: windows-latest
-            artifact_name: koda_installer.exe
+            artifact_name: koda_win.exe
             path: target/release/koda.exe
           - os: macos-latest
-            artifact_name: koda_installer_mac
+            artifact_name: koda_mac
             path: target/release/koda
           - os: ubuntu-latest
-            artifact_name: koda_installer_linux
+            artifact_name: koda_linux
             path: target/release/koda
 
     runs-on: ${{ matrix.os }}
@@ -27,24 +27,18 @@ jobs:
       - name: Build Binary
         run: cargo build --release
 
-      - name: Prepare Windows Artifact
+      - name: Rename and Move (Windows)
         if: matrix.os == 'windows-latest'
-        run: |
-          if (Test-Path "${{ matrix.path }}") {
-            Copy-Item "${{ matrix.path }}" -Destination "${{ matrix.artifact_name }}"
-          }
+        run: Copy-Item "target/release/koda.exe" -Destination "koda_win.exe"
         shell: pwsh
 
-      - name: Prepare Unix Artifact
+      - name: Rename and Move (Unix)
         if: matrix.os != 'windows-latest'
-        run: |
-          if [ -f "${{ matrix.path }}" ]; then
-            cp "${{ matrix.path }}" "${{ matrix.artifact_name }}"
-          fi
+        run: cp target/release/koda koda_installer
         shell: bash
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: koda-${{ matrix.os }}
-          path: koda_installer*
+          path: koda_*
