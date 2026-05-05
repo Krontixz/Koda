@@ -10,11 +10,11 @@ Koda is designed to be memorized in under 2 minutes. There are only 5 primary "P
 
 ### 1. Basic Key-Values
 Unlike JSON, you don't need quotes for keys or strings. A simple colon separates them.
-
+```
 key: value
 version: 1.0.2
 status: online
-
+```
 ### 2. Variables (@)
 Variables allow you to store a value and reuse it anywhere. This makes bulk updates instant.
 
