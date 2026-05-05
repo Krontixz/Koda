@@ -1,22 +1,49 @@
 name: Build Koda
 on: [push]
+
 jobs:
   release:
     strategy:
       matrix:
-        os: [windows-latest, macos-latest, ubuntu-latest]
+        include:
+          - os: windows-latest
+            artifact_name: koda_installer.exe
+            path: target/release/koda.exe
+          - os: macos-latest
+            artifact_name: koda_installer_mac
+            path: target/release/koda
+          - os: ubuntu-latest
+            artifact_name: koda_installer_linux
+            path: target/release/koda
+
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v4
-      - name: Build
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Build Binary
         run: cargo build --release
-      - name: Rename Windows
+
+      - name: Prepare Windows Artifact
         if: matrix.os == 'windows-latest'
-        run: mv target/release/koda.exe koda_installer.exe
-      - name: Rename Unix
+        run: |
+          if (Test-Path "${{ matrix.path }}") {
+            Copy-Item "${{ matrix.path }}" -Destination "${{ matrix.artifact_name }}"
+          }
+        shell: pwsh
+
+      - name: Prepare Unix Artifact
         if: matrix.os != 'windows-latest'
-        run: mv target/release/koda koda_installer
-      - name: Upload
+        run: |
+          if [ -f "${{ matrix.path }}" ]; then
+            cp "${{ matrix.path }}" "${{ matrix.artifact_name }}"
+          fi
+        shell: bash
+
+      - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: koda-${{ matrix.os }}
