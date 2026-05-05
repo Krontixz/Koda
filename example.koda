@@ -1,0 +1,13 @@
+@base_url: https://api.site.com
+@timeout: 5000
+
+server_config:
+    endpoint: @base_url/v1
+    db_connection: >./database.json
+    auth_logic: !./scripts/auth.lua
+
+user_data:
+    name: KodaUser
+    settings:
+        theme: dark
+        notifications: true
