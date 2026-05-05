@@ -1,3 +1,7 @@
+pub mod processor;
+pub mod resolver;
+pub mod executor;
+
 pub enum KodaType {
     Data,
     Variable,
@@ -60,6 +64,7 @@ pub fn tokenize(line: &str) -> KodaNode {
 }
 
 #[no_mangle]
-pub extern "C" fn koda_parse(input: *const i8) {
-    
+pub extern "C" fn koda_parse(input: *const std::os::raw::c_char) -> *mut std::os::raw::c_char {
+    // This allows C++, C#, Java to send a string and get a result
+    std::ptr::null_mut() 
 }
