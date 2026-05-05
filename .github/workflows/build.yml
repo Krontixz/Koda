@@ -7,7 +7,7 @@ jobs:
         os: [windows-latest, macos-latest, ubuntu-latest]
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Build
         run: cargo build --release
       - name: Rename Windows
@@ -17,7 +17,7 @@ jobs:
         if: matrix.os != 'windows-latest'
         run: mv target/release/koda koda_installer
       - name: Upload
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: koda-${{ matrix.os }}
           path: koda_installer*
