@@ -1,34 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Koda | Fast Data Linking</title>
+    <title>Koda Language</title>
     <style>
-        :root { --bg: #0d1117; --card: #161b22; --text: #c9d1d9; --link: #58a6ff; --btn: #238636; }
-        body { background: var(--bg); color: var(--text); font-family: -apple-system, sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; }
-        .container { background: var(--card); border: 1px solid #30363d; padding: 3rem; border-radius: 12px; text-align: center; max-width: 500px; }
-        .download-btn { display: block; background: var(--btn); color: white; padding: 1rem; border-radius: 6px; text-decoration: none; margin: 10px 0; font-weight: bold; transition: 0.2s; }
-        .download-btn:hover { filter: brightness(1.2); }
-        code { background: #000; padding: 5px 10px; border-radius: 4px; color: #79c0ff; font-family: monospace; }
-        .platform-label { font-size: 0.8rem; color: #8b949e; margin-bottom: 5px; }
+        body { background: #0d1117; color: #c9d1d9; font-family: sans-serif; text-align: center; padding-top: 100px; }
+        .download { display: inline-block; background: #238636; color: white; padding: 20px; border-radius: 8px; text-decoration: none; font-weight: bold; margin: 10px; }
+        code { background: #161b22; padding: 10px; border-radius: 6px; color: #79c0ff; display: block; width: 200px; margin: 20px auto; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Koda Engine</h1>
-        <p>Zero-dependency data linking and execution.</p>
-        
-        <div class="platform-label">Windows 10/11</div>
-        <a href="https://github.com/YOUR_USER/koda-repo/releases/latest/download/koda_win.zip" class="download-btn">Download .ZIP Installer</a>
-        
-        <div class="platform-label">macOS (Intel/M1/M2)</div>
-        <a href="https://github.com/YOUR_USER/koda-repo/releases/latest/download/koda_mac.dmg" class="download-btn">Download .DMG Image</a>
-        
-        <div class="platform-label">Android (Termux)</div>
-        <a href="https://github.com/YOUR_USER/koda-repo/releases/latest/download/koda.apk" class="download-btn">Download .APK</a>
-
-        <hr style="border: 0; border-top: 1px solid #30363d; margin: 2rem 0;">
-        <p>Once downloaded, run <code>koda install</code></p>
-    </div>
+    <h1>Koda Language</h1>
+    <p>Download the installer for your system:</p>
+    <a href="koda_win.exe" class="download">Windows (.exe)</a>
+    <a href="koda_mac.dmg" class="download">macOS (.dmg)</a>
+    <p>After downloading, run:</p>
+    <code>koda install</code>
 </body>
 </html>
